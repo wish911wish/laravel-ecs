@@ -11,8 +11,8 @@ workflows:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: true
-          dockerfile: Dockerfile
+          dockerfile: infrastructure/docker/nginx/Dockerfile
           path: .
           region: AWS_REGION
-          repo: circleci-ecr-orb-demo
+          repo: laravel-ecs
           tag: "$CIRCLE_SHA1"
