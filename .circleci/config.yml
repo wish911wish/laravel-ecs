@@ -1,11 +1,13 @@
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-ecr: circleci/aws-ecr@6.15
+  aws-ecs: circleci/aws-ecs@2.1.0
 
 workflows:
   build_and_push_image:
     jobs:
+    二つのimage`をプッシュする方法を確かめる’
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -16,3 +18,9 @@ workflows:
           region: AWS_REGION
           repo: laravel-ecs
           tag: "$CIRCLE_SHA1"
+      - aws-ecs/deploy-service-update:
+          cluster-name: "${MY_APP_PREFIX}-cluster"
+          container-image-name-updates: "container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}"
+          family: "${MY_APP_PREFIX}-service"
+          requires:
+            - aws-ecr/build-and-push-image
