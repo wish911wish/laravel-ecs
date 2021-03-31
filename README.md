@@ -17,7 +17,7 @@ http://localhost:80
 
 ## 本番環境
 
-<https://example.com>
+<https://laravel-ecs.dev.nozomikawakami.com>
 
 ## API ドキュメント
 
