@@ -23,6 +23,6 @@ workflows:
           requires:
             - push-app-service
             - push-web-service
-          cluster-name: "${MY_APP_PREFIX}-cluster"
-          container-image-name-updates: "container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}"
-          family: "${MY_APP_PREFIX}-service"
+          cluster-name: laravel-ecs
+          container-image-name-updates: "container=laravel-ecs-ecs-service,tag=${CIRCLE_SHA1}"
+          family: laravel-ecs-ecs-service
