@@ -17,10 +17,10 @@ COPY --from=node /opt /opt
 # nginx config file
 COPY ./infrastructure/docker/nginx/*.conf /etc/nginx/conf.d/
 
+RUN mkdir /work/backend/public
+
 WORKDIR /work/backend
 
 FROM NGINX_RUNTIME as NGINX_APPLICATION_BUNDLED
-
-RUN mkdir /work/backend/public
 
 COPY ./backend/public /work/backend/public
