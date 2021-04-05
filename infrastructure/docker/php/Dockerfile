@@ -32,7 +32,7 @@ WORKDIR /work/backend
 
 FROM PHP_RUNTIME as LARAVEL_APPLICATION_BUNDLED
 
-COPY ./backend .
+COPY ./backend /work/backend
 
 RUN composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader --no-dev \
     && chmod -R 777 storage
