@@ -17,7 +17,7 @@ COPY --from=node /opt /opt
 # nginx config file
 COPY ./infrastructure/docker/nginx/*.conf /etc/nginx/conf.d/
 
-RUN mkdir /work/backend/public
+RUN mkdir -p /work/backend/public
 
 WORKDIR /work/backend
 
