@@ -34,5 +34,5 @@ FROM PHP_RUNTIME as LARAVEL_APPLICATION_BUNDLED
 
 COPY ./backend .
 
-RUN composer install --no-progress　--no-interaction --prefer-dist --optimize-autoloader --no-dev \
+RUN composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader --no-dev \
     && chmod -R 777 storage
