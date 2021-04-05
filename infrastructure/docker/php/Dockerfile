@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-buster
+FROM php:8.0-fpm-buster as PHP_RUNTIME
 
 SHELL ["/bin/bash", "-oeux", "pipefail", "-c"]
 
@@ -29,3 +29,10 @@ COPY ./infrastructure/docker/php/php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d
 COPY ./infrastructure/docker/php/php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /work/backend
+
+FROM PHP_RUNTIME as LARAVEL_APPLICATION_BUNDLED
+
+COPY ./backend .
+
+RUN composer install --no-progress　--no-interaction --prefer-dist --optimize-autoloader --no-dev \
+    && chmod -R 777 storage

@@ -7,6 +7,7 @@ services:
     build:
       context: .
       dockerfile: ./infrastructure/docker/php/Dockerfile
+      target: PHP_RUNTIME
     volumes:
       - php-fpm-socket:/var/run/php-fpm
       - ./backend:/work/backend
