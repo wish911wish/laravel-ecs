@@ -21,6 +21,4 @@ WORKDIR /work/backend
 
 FROM NGINX_RUNTIME as NGINX_APPLICATION_BUNDLED
 
-COPY ./backend/public ./public
-
-EXPOSE 80
+COPY ./backend/public /work/backend/public
