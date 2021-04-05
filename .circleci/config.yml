@@ -5,26 +5,28 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.1.0
 
 workflows:
-  build_and_push_image:
+  build-and-deploy:
     jobs:
-      push-app-service:
-        steps:
-          - aws-ecr/build-and-push-image:
+      - push-app-service:
+          steps:
+            - aws-ecr/build-and-push-image:
               create-repo: true
               dockerfile: infrastructure/docker/php/Dockerfile
               path: .
               repo: laravel-ecs-app
-      push-web-service:
-        steps:
-          - aws-ecr/build-and-push-image:
-              create-repo: true
-              dockerfile: infrastructure/docker/nginx/Dockerfile
-              path: .
-              repo: laravel-ecs-web
-      - aws-ecs/deploy-service-update:
-          cluster-name: "${MY_APP_PREFIX}-cluster"
-          container-image-name-updates: "container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}"
-          family: "${MY_APP_PREFIX}-service"
+      - push-web-service:
+          steps:
+            - aws-ecr/build-and-push-image:
+                create-repo: true
+                dockerfile: infrastructure/docker/nginx/Dockerfile
+                path: .
+                repo: laravel-ecs-web
+      - deploy-service:
           requires:
             - push-app-service
-            - push-web-service
+            - push-app-service
+          steps:
+            - aws-ecs/deploy-service-update:
+                cluster-name: "${MY_APP_PREFIX}-cluster"
+                container-image-name-updates: "container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}"
+                family: "${MY_APP_PREFIX}-service"
