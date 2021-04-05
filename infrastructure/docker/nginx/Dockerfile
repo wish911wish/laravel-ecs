@@ -1,5 +1,5 @@
 FROM node:14.2-alpine as node
-FROM nginx:1.18-alpine
+FROM nginx:1.18-alpine as NGINX_RUNTIME
 
 SHELL ["/bin/ash", "-oeux", "pipefail", "-c"]
 
@@ -18,3 +18,9 @@ COPY --from=node /opt /opt
 COPY ./infrastructure/docker/nginx/*.conf /etc/nginx/conf.d/
 
 WORKDIR /work/backend
+
+FROM NGINX_RUNTIME as NGINX_APPLICATION_BUNDLED
+
+COPY ./backend/public ./public
+
+EXPOSE 80

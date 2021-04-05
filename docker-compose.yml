@@ -23,6 +23,7 @@ services:
     build:
       context: .
       dockerfile: ./infrastructure/docker/nginx/Dockerfile
+      target: NGINX_RUNTIME
     ports:
       - ${WEB_PORT:-80}:80
     volumes:
