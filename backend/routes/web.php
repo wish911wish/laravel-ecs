@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Log;
 */
 
 Route::get('/', function () {
-    Log::debug('log test');
+    Log::error('log test');
     return view('welcome');
 });
