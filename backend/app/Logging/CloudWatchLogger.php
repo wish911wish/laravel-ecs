@@ -27,8 +27,6 @@ class CloudWatchLogger
         $groupName = config('app.name').'-'.config('app.env');
 
         // Log stream name, will be created if none
-        // FIX ME 環境変数からhost名を取得したいが、configから文字列を設定しようとすると、streamが作成されない。ひとまず、固定の文字列で作る。
-        // $streamName = config('app.hostname');
         $streamName = config('app.name');
 
         // Days to keep logs, 14 by default. Set to `null` to allow indefinite retention.
