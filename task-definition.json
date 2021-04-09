@@ -114,8 +114,20 @@
       "workingDirectory": null,
       "secrets": [
         {
+          "valueFrom": "laravel-ecs-aws-access-key",
+          "name": "AWS_ACCESS_KEY_ID"
+        },
+        {
+          "valueFrom": "laravel-ecs-aws-secret-access-key",
+          "name": "AWS_SECRET_ACCESS_KEY"
+        },
+        {
           "valueFrom": "laravel-ecs-db-password",
           "name": "DB_PASSWORD"
+        },
+        {
+          "valueFrom": "laravel-ecs-app-key",
+          "name": "APP_KEY"
         }
       ],
       "dockerSecurityOptions": null,
@@ -150,7 +162,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:763442555688:task-definition/laravel-ecs-ecs-task-definition:7",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:763442555688:task-definition/laravel-ecs-ecs-task-definition:9",
   "family": "laravel-ecs-ecs-task-definition",
   "requiresAttributes": [
     {
@@ -214,7 +226,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 7,
+  "revision": 9,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
