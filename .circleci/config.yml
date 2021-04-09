@@ -19,13 +19,10 @@ workflows:
           dockerfile: infrastructure/docker/nginx/Dockerfile
           path: .
           repo: laravel-ecs-web
-      - aws-ecs/update-task-definition-from-json:
-          task-definition-json: task-definition.json
-
-      # - aws-ecs/deploy-service-update:
-      #     requires:
-      #       - push-app-service
-      #       - push-web-service
-      #     cluster-name: laravel-ecs
-      #     container-image-name-updates: "container=laravel-ecs-ecs-service,tag=${CIRCLE_SHA1}"
-      #     family: laravel-ecs-ecs-service
+      - aws-ecs/deploy-service-update:
+          requires:
+            - push-app-service
+            - push-web-service
+          cluster-name: laravel-ecs
+          container-image-name-updates: "container=laravel-ecs-ecs-service,tag=${CIRCLE_SHA1}"
+          family: laravel-ecs-ecs-service
