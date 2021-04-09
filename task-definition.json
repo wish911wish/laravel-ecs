@@ -79,7 +79,28 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [],
+      "environment": [
+        {
+          "name": "DB_CONNECTION",
+          "value": "mysql"
+        },
+        {
+          "name": "DB_DATABASE",
+          "value": "laravel-ecs-rds"
+        },
+        {
+          "name": "DB_HOST",
+          "value": "laravel-ecs-rds.cl5w9quf4alm.ap-northeast-1.rds.amazonaws.com"
+        },
+        {
+          "name": "DB_PORT",
+          "value": "3306"
+        },
+        {
+          "name": "DB_USERNAME",
+          "value": "admin"
+        }
+      ],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
@@ -91,7 +112,12 @@
         }
       ],
       "workingDirectory": null,
-      "secrets": null,
+      "secrets": [
+        {
+          "valueFrom": "laravel-ecs-db-password",
+          "name": "DB_PASSWORD"
+        }
+      ],
       "dockerSecurityOptions": null,
       "memory": null,
       "memoryReservation": null,
@@ -124,7 +150,7 @@
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:763442555688:task-definition/laravel-ecs-ecs-task-definition:6",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:763442555688:task-definition/laravel-ecs-ecs-task-definition:7",
   "family": "laravel-ecs-ecs-task-definition",
   "requiresAttributes": [
     {
@@ -167,6 +193,12 @@
       "targetId": null,
       "targetType": null,
       "value": null,
+      "name": "ecs.capability.secrets.ssm.environment-variables"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     },
     {
@@ -182,7 +214,7 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "256",
-  "revision": 6,
+  "revision": 7,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
